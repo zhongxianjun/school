@@ -6,7 +6,9 @@
       <div class="containe">
         <div class="header">
           <input type="text" name="search" v-model="val" placeholder="请输入电影相关信息进行搜索...">
-          <i @click="search"></i>
+          <router-link v-if="val.trim()" to="search">
+            <i @click="search"></i>
+          </router-link>
         </div>
         <div class="history">
           <h2 class="title">历史记录</h2>
@@ -42,6 +44,7 @@ export default {
   methods: {
     search(){
        let val = this.val;
+       console.log(val);
        let count = 0;
        let _this = this;
 
