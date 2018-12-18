@@ -19,7 +19,18 @@
           </div>
         </div>
       </div>
+
+      <div class="footer">
+        <router-link to="login">
+          <span class="login">登录</span>
+        </router-link>
+        
+        <router-link to="regist">
+          <span class="regist">注册</span>
+        </router-link>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -30,7 +41,7 @@ export default {
     return {
       val: "",
       history: [
-        {name: "海贼王剧场版"},
+        {name: "海王"},
         {name: "极限特工"},
         {name: "绝地求生"},
         {name: "黑客帝国"},
@@ -50,7 +61,7 @@ export default {
 
        this.history.map((item, index)=>{
         
-        if(val == item.name){
+       if(val == item.name){
           _this.history.splice(index,1);
           count++;
         }
@@ -94,6 +105,9 @@ hr{
   background: linear-gradient(to bottom, #cffbd085, #cffbd085);
   margin: 0 auto;
   padding-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  
 }
 .index .main .containe{
   max-width: 340px;
@@ -151,5 +165,16 @@ hr{
   border-radius: 12px;
   background: #ddd;
   margin: 6px 2px;
+}
+.index .main .footer{
+  width: 180px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 auto;
+  margin-top: 300px;
+}
+.index .main .footer span{
+  margin: 0 20px;
+  color: rgba(111,111,111,85);
 }
 </style>
