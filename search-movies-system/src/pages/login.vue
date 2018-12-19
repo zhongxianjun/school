@@ -3,8 +3,8 @@
     <div class="container">
         <div class="title">登　录</div>
         <div class="form">
-            账号：<input type="text" name="username" placeholder="请输入账号" v-model="user">
-            密码：<input type="password" name="password" placeholder="请输入密码" v-model="psd">
+            <span class="prompt">账号：</span><input type="text" name="username" placeholder="请输入账号" v-model="user">
+            <span class="prompt">密码：</span><input type="password" name="password" placeholder="请输入密码" v-model="psd">
         </div>
         
         <div class="btn">
@@ -59,7 +59,7 @@ export default {
 }
 .title{
     font-size: 24px;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
     padding-top: 30px;
 }
 .form{
@@ -68,8 +68,13 @@ export default {
     justify-content: center;
     align-items: center;
 }
+.form .prompt{
+    display: inline-block;
+    width: 50px;
+    text-align: left;
+}
 .form input{
-  width: 280px;
+  width: 285px;
   height: 32px;
   line-height: 32px;
   padding: 0 8px;
@@ -81,20 +86,23 @@ export default {
   margin: 10px 0;
 }
 .btn{
-    width: 360px;
-    margin: 0 50px;
     display: flex;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
-span{
-    display: inline-block;
-    margin: 20px 10px;
-    cursor: pointer;
-}
-.loginBtn{
-    width: 240px;
+.btn span{
+    width: 60px;
     height: 28px;
     line-height: 28px;
+    display: inline-block;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.btn .loginBtn{
+    width: 355px;
+    height: 36px;
+    line-height: 36px;
     background: #3b38bf;
     color: #fff;
     border-radius: 5px;

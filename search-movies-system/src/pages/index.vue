@@ -6,9 +6,9 @@
       <div class="containe">
         <div class="header">
           <input type="text" name="search" v-model="val" placeholder="请输入电影相关信息进行搜索...">
-          <router-link v-if="val.trim()" to="search">
+          <!-- <router-link v-if="val.trim()" to="search"> -->
             <i @click="search"></i>
-          </router-link>
+          <!-- </router-link> -->
         </div>
         <div class="history">
           <h2 class="title">历史记录</h2>
@@ -35,6 +35,11 @@
 </template>
 
 <script>
+
+// import Vue from 'vue';
+// import VueJsonp from 'vue-jsonp';
+// Vue.use(VueJsonp);
+
 export default {
   name: 'index',
   data () {
@@ -52,34 +57,70 @@ export default {
       ]
     }
   },
+  created(){
+    
+  },
   methods: {
     search(){
-       let val = this.val;
-       console.log(val);
+       let val = this.val.trim();
        let count = 0;
        let _this = this;
+       let status = false;
 
-       this.history.map((item, index)=>{
+       (function(){
+          _this.history.map((item, index)=>{
+          
+            if(val == item.name){
+              _this.history.splice(index,1);
+              count++;
+            }
+
+            if( index > 10){
+              _this.history.splice(11,1);
+            }
+          })
+
+          if(val !== "" && count == 1){
+
+            _this.history.unshift({name: val});
+            count = 0;
+            status = true;
+          }else if(count == 1){
+            _this.history.unshift({name: val});
+            status = false;
+          }
+
+          return status;
+       })();
         
-       if(val == item.name){
-          _this.history.splice(index,1);
-          count++;
+        
+        if(status){
+          this.$router.push("/search");
         }
-       })
-       if(val !== "" && count == 0){
-
-        this.history.unshift({name: val});
-        count = 0;
-
-       }else if(count > 0){
-         this.history.unshift({name: val});
-       }
     },
 
     searchHistory(item){
       this.val = item;
       this.search();
     }
+
+    // send(){
+    //   console.log(66);
+    //   let url = "http://www.some-site.com/data";
+    //   this.$jsonp(url, 
+    //     { 
+    //       name: 'MyName',
+    //       age: 20 
+    //     })
+    //   .then(res => {
+        
+    //     console.log(res.data,'----------');
+    //     // Success.
+    //   }).catch(err => {
+    //     // Failed.
+    //     console.log(err.data,'+++++++++++');
+    //   })
+    // }
   }
 }
 </script>

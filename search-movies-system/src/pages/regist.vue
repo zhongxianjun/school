@@ -3,9 +3,9 @@
     <div class="container">
         <div class="title">注册</div>
         <div class="form">
-            <div>账号：<input type="text" name="username" placeholder="请输入需要注册的账号" v-model="user"></div>
-            <div>密码：<input type="password" name="password" placeholder="请输入登录密码" v-model="psd"></div>
-            <div>确认密码：<input type="password" name="password" placeholder="请确认登录密码" v-model="truePsd"></div>
+            <div><span class="prompt">账号：</span><input type="text" name="username" placeholder="请输入注册账号" v-model="user"></div>
+            <div><span class="prompt">密码：</span><input type="password" name="password" placeholder="请输入登录密码" v-model="psd"></div>
+            <div><span class="prompt">确认密码：</span><input type="password" name="password" placeholder="请确认密码" v-model="truePsd"></div>
         </div>
         
         <div class="btn">
@@ -72,6 +72,11 @@ export default {
     justify-content: center;
     align-items: center;
 }
+.form .prompt{
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+}
 .form input{
   width: 255px;
   height: 32px;
@@ -85,20 +90,23 @@ export default {
   margin: 10px 0;
 }
 .btn{
-    width: 360px;
-    margin: 0 50px;
     display: flex;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
-span{
-    display: inline-block;
-    margin: 20px 10px;
-    cursor: pointer;
-}
-.registBtn{
-    width: 240px;
+.btn span{
+    width: 60px;
     height: 28px;
     line-height: 28px;
+    display: inline-block;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.btn .registBtn{
+    width: 355px;
+    height: 36px;
+    line-height: 36px;
     background: #3b38bf;
     color: #fff;
     border-radius: 5px;
