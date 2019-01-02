@@ -35,19 +35,24 @@
 </template>
 
 <script>
-
+import {addCookie, getCookie, delCookie} from '../gloab.js';
 import SearchList from './../components/searchList.vue';
-// import Vue from 'vue';
+import Vue from 'vue';
 // import VueJsonp from 'vue-jsonp';
 // Vue.use(VueJsonp);
 
+Vue.prototype.$cookieStore = {
+  addCookie,
+  getCookie,
+  delCookie
+}
 export default {
   name: 'index',
   data () {
     return {
       val: "",
-      btnState: false,
-      hisState: false,
+      btnState: true,
+      hisState: true,
       history: [
         {name: "海王"},
         {name: "极限特工"},
@@ -62,44 +67,54 @@ export default {
   },
   created(){
     
+    // this.history = this.$cookieStore.getCookie("history");
+    // console.log( this.$cookieStore.getCookie("history"));
+  },
+  mounted(){
+    this.btnState = true;
+    this.hisState = true;
   },
   methods: {
     search(){
        let val = this.val.trim();
+       let len = this.history.length;
        let count = 0;
        let _this = this;
-       let status = false;
 
        (function(){
-          _this.history.map((item, index)=>{
-          
-            if(val == item.name){
-              _this.history.splice(index,1);
-              count++;
-            }
+          // if(len > 0){
+            _this.history.map((item, index)=>{
+            
+              if(val == item.name){
+                _this.history.splice(index,1);
+                count++;
+                _this.btnState = false;
+                _this.hisState = false;
 
-            if( index > 10){
-              _this.history.splice(11,1);
-            }
-          })
+                // _this.$cookieStore.addCookie("history", _this.history);
+              }else if(val == ""){
+                _this.btnState = true;
+                _this.hisState = true;
+              }
+
+              if( index > 10){
+                _this.history.splice(11,1);
+              }
+            })
+          // }
+          // else if(len == 0 && val !== ""){
+          //   _this.$cookieStore.addCookie("history", val);
+          // }
 
           if(val !== "" && count == 1){
 
             _this.history.unshift({name: val});
             count = 0;
-            status = true;
           }else if(count == 1){
             _this.history.unshift({name: val});
-            status = false;
           }
 
-          return status;
        })();
-        
-        
-        if(status){
-          this.$router.push("/search");
-        }
     },
 
     searchHistory(item){
