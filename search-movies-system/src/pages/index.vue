@@ -6,11 +6,9 @@
       <div class="containe">
         <div class="header">
           <input type="text" name="search" v-model="val" placeholder="请输入电影相关信息进行搜索...">
-          <!-- <router-link v-if="val.trim()" to="search"> -->
             <i @click="search"></i>
-          <!-- </router-link> -->
         </div>
-        <div class="history">
+        <div class="history" v-if="hisState">
           <h2 class="title">历史记录</h2>
           <div class="list">
             <div class="li" v-for="(item, index) in history" @click="searchHistory(item.name)">
@@ -18,9 +16,11 @@
             </div>
           </div>
         </div>
+
+        <SearchList v-if="!hisState"></SearchList>
       </div>
 
-      <div class="footer">
+      <div class="footer" v-if="btnState">
         <router-link to="login">
           <span class="login">登录</span>
         </router-link>
@@ -36,6 +36,7 @@
 
 <script>
 
+import SearchList from './../components/searchList.vue';
 // import Vue from 'vue';
 // import VueJsonp from 'vue-jsonp';
 // Vue.use(VueJsonp);
@@ -45,6 +46,8 @@ export default {
   data () {
     return {
       val: "",
+      btnState: false,
+      hisState: false,
       history: [
         {name: "海王"},
         {name: "极限特工"},
@@ -121,6 +124,9 @@ export default {
     //     console.log(err.data,'+++++++++++');
     //   })
     // }
+  },
+  components: {
+    SearchList
   }
 }
 </script>
